@@ -9,14 +9,12 @@ public class Pool2 extends Pool {   //no kids alone
 
     public synchronized void kidSwims() throws InterruptedException {
         
-        while( numkid >= (numins*2) ){ 
+        while( numkid >= (numins*(log.nk/log.ni)) ){ 
             
             wait();
             log.waitingToSwim();
         }
        
-
-
         log.swimming();
         numkid ++;
         //ratio--;
