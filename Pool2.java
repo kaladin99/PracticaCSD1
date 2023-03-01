@@ -4,20 +4,25 @@ public class Pool2 extends Pool {   //no kids alone
     private int numkid = 0;
     private int numins = 0;
     //private int ratio = 0;
+    int ki_L;
+    int cap_L;
 
-    public void init(int ki, int cap){}
+    public void init(int ki, int cap){
+        ki_L = ki;
+        cap_L = cap;
+
+
+    }
 
     public synchronized void kidSwims() throws InterruptedException {
         
-        while( numkid >= (numins*2) ){ 
+        while( numkid >= numins * ki_L ){ 
             
             wait();
             log.waitingToSwim();
         }
        
-
-
-        log.swimming();
+        log.swimming(); 
         numkid ++;
         //ratio--;
     }
@@ -41,7 +46,7 @@ public class Pool2 extends Pool {   //no kids alone
     } // al entrar un monitor ha de avisar als xiquets que volen entrar
     public synchronized void instructorRests() throws InterruptedException  {
         
-        while (numkid >= (numins * 2  - 1)){
+        while (numkid >= (numins * ki_L  - 1)){
             wait();
             log.waitingToRest();
             
