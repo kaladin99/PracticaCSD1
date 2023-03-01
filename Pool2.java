@@ -15,7 +15,7 @@ public class Pool2 extends Pool {   //no kids alone
             log.waitingToSwim();
         }
        
-        log.swimming();
+        log.swimming(); 
         numkid ++;
         //ratio--;
     }
