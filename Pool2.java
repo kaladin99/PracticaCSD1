@@ -29,24 +29,26 @@ public class Pool2 extends Pool {   //no kids alone
 
     public synchronized void kidRests()   throws InterruptedException   {
         
+        numkid--;
         notifyAll();
         log.resting();
-        numkid--;
+        
        // ratio ++;
     
     } // al ixir el xiquet ha de avisar als instructors que volen ixir
 
     public synchronized void instructorSwims() throws InterruptedException   {
         
+        numins++;
         notifyAll();
         log.swimming();
-        numins++;
+       
       //ratio += 2;
     
     } // al entrar un monitor ha de avisar als xiquets que volen entrar
     public synchronized void instructorRests() throws InterruptedException  {
         
-        while (numkid >= (numins * ki_L  - 1)){
+        while (numkid > ((numins -1) * ki_L  )){
             wait();
             log.waitingToRest();
             

@@ -5,9 +5,7 @@ public class Pool4 extends Pool {   //no kids alone
     private int numins = 0;
     //private int ratio = 0;
     //private final int  cap_L = 5;
-    private boolean waiting;
-    
-
+    private boolean waiting = false;
     int ki_L;
     int cap_L;
 
@@ -18,7 +16,7 @@ public class Pool4 extends Pool {   //no kids alone
 
     public synchronized void kidSwims() throws InterruptedException {
         
-        while( numkid >= (numins*2) || (numkid + numins) ==  cap_L || waiting == true ){ 
+        while( numkid >= (numins* ki_L) || (numkid + numins) ==  cap_L || waiting == true ){ 
             
             wait();
             log.waitingToSwim();
@@ -51,10 +49,12 @@ public class Pool4 extends Pool {   //no kids alone
     } // al entrar un monitor ha de avisar als xiquets que volen entrar
     public synchronized void instructorRests() throws InterruptedException  {
         
-        while (numkid >= (numins * ki_L  - 1)){
-            wait();
+        while (numkid > ((numins -1) * ki_L  )){
             log.waitingToRest();
             waiting = true;
+            wait();
+            
+           
             
         }
         log.resting();

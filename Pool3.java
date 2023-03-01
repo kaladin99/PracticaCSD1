@@ -49,7 +49,7 @@ public class Pool3 extends Pool {   //no kids alone
     } // al entrar un monitor ha de avisar als xiquets que volen entrar
     public synchronized void instructorRests() throws InterruptedException  {
         
-        while (numkid >= (numins * ki_L  - 1)){
+        while (numkid > ((numins -1) * ki_L  )){
             wait();
             log.waitingToRest();
             
