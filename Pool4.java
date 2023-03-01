@@ -4,15 +4,21 @@ public class Pool4 extends Pool {   //no kids alone
     private int numkid = 0;
     private int numins = 0;
     //private int ratio = 0;
-    private final int maxCap = 5;
+    //private final int  cap_L = 5;
     private boolean waiting;
     
 
-    public void init(int ki, int cap){}
+    int ki_L;
+    int cap_L;
+
+    public void init(int ki, int cap){
+        ki_L = ki;
+        cap_L = cap;
+    }
 
     public synchronized void kidSwims() throws InterruptedException {
         
-        while( numkid >= (numins*2) || (numkid + numins) == maxCap || waiting == true ){ 
+        while( numkid >= (numins*2) || (numkid + numins) ==  cap_L || waiting == true ){ 
             
             wait();
             log.waitingToSwim();
@@ -35,7 +41,7 @@ public class Pool4 extends Pool {   //no kids alone
     } // al ixir el xiquet ha de avisar als instructors que volen ixir
 
     public synchronized void instructorSwims() throws InterruptedException   {
-        while (numins + numkid == maxCap){wait();}
+        while (numins + numkid ==  cap_L){wait();}
         
         notifyAll();
         log.swimming();

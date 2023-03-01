@@ -16,7 +16,7 @@ public class Pool2 extends Pool {   //no kids alone
 
     public synchronized void kidSwims() throws InterruptedException {
         
-        while( numkid >= ki_L ){ 
+        while( numkid >= numins * ki_L ){ 
             
             wait();
             log.waitingToSwim();
@@ -46,7 +46,7 @@ public class Pool2 extends Pool {   //no kids alone
     } // al entrar un monitor ha de avisar als xiquets que volen entrar
     public synchronized void instructorRests() throws InterruptedException  {
         
-        while (numkid < ki_L){
+        while (numkid >= (numins * ki_L  - 1)){
             wait();
             log.waitingToRest();
             
